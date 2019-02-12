@@ -1,15 +1,33 @@
-# FURS fiscal verification of documents for Slovenian invoices
+### Usage:
 
-To start using just add your own test .p12 certificate and passphrase received from tax office.
 
-By default set to send invoice, to register premise just assign premise to payload instead of invoice.
-
-```bash
-npm i
-npm start
+1. Require the package
+```
+const Furs = require('furs-invoices');
 ```
 
-If you're looking for a complete invoicing API solution check out our project [Space Invoices](https://spaceinvoices.com).
+2. Initialize the library
+```
+const furs = Furs({
+  env: 'production',
+  certPath: 'path/to/your/certificate',
+  certPass: 'certificate-password',
+  taxID: 'your tax ID',
+  premiseID: 'your furs registered business premise ID',
+  deviceID: 'your furs registered electronic device ID',
+  taxRate: 22.00
+});
+```
 
-Author: Boštjan Pišler @ [Studio 404](http://studio404.net)
-For use in [Enostavni računi](https://enostavni-racuni.eu), [Space Invoices](https://spaceinvoices.com) and [Apollo](https://getapollo.io) projects.
+3. Generate an invoice and obtain EOR, ZOI and QR
+```
+const invoice = {
+  id: 1,
+  amount: 5,
+  date: moment()
+}
+const invoiceData = await furs.registerInvoice(invoice.id, invoice.amount, invoice.date);
+```
+
+Original author:
+Boštjan Pišler @ [Studio 404](http://studio404.net)
