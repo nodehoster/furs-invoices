@@ -32,12 +32,12 @@ const Furs = ({ env, certPath, certPass, taxID, premiseID, deviceID, taxRate }) 
   const dtf = 'Y-MM-DD[T]HH:mm:ss[Z]';
 
   // not needed for now
-  const tlsCertFile = env === 'production' ? CERTS.production.tlsPubKey : CERTS.test.tlsPubKey;
+  const tlsCertFile = path.resolve(__dirname, env === 'production' ? CERTS.production.tlsPubKey : CERTS.test.tlsPubKey);
   const myCertFile = certPath;
   const passphrase = certPass;
-  const fursCertPemFile = env === 'production' ? CERTS.production.signPubKey : CERTS.test.signPubKey;
-  const rootCert = env === 'production' ? CERTS.production.root : CERTS.test.root;
-  const authorityCert = env === 'production' ? CERTS.production.authority : CERTS.test.authority;
+  const fursCertPemFile = path.resolve(__dirname, env === 'production' ? CERTS.production.signPubKey : CERTS.test.signPubKey);
+  const rootCert = path.resolve(__dirname, env === 'production' ? CERTS.production.root : CERTS.test.root);
+  const authorityCert = path.resolve(__dirname, env === 'production' ? CERTS.production.authority : CERTS.test.authority);
 
   const requestOptions = {
     requestCert: true,
