@@ -203,10 +203,9 @@ const Furs = ({ env, certPath, certPass, taxID, premiseID, deviceID, taxRate }) 
       // Generate QR code value
       let QR = hexToDecimal(ZOI, 'dec');
       while (QR.length < 39) QR = '0' + QR;
-
-      QR = QR + moment(IssueDateTime, 'DD.MM.Y HH:mm:ss').format('YYMMDDHHmmss');
-
+      
       QR += TaxNumber;
+      QR = QR + moment(IssueDateTime).format('YYMMDDHHmmss');
 
       let controlNum = 0;
       for (let i = 0; i < QR.length; i++) controlNum += parseInt(QR[i]);
